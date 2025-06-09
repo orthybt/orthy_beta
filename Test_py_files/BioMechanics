@@ -1,0 +1,50 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the tooth and force system parameters
+tooth_length = 25  # Total length of the tooth (mm)
+crown_length = 10   # Approximate length of the crown (mm)
+root_length = tooth_length - crown_length  # Root length (mm)
+
+# Define the center of resistance location (~1/3 to 1/2 of root length from alveolar crest)
+center_of_resistance = crown_length + (root_length * 0.4)  # Approximate CR position
+
+# Define force application points
+force_application_point = crown_length * 0.8  # Approximate middle of the crown
+
+# Define movement direction (distal displacement)
+dx = 0.2  # Small translation in distal direction
+
+# Plot the tooth
+fig, ax = plt.subplots(figsize=(4, 8))
+ax.plot([0, 0], [0, tooth_length], 'k', linewidth=4)  # Tooth structure
+
+# Mark key points
+ax.scatter(0, force_application_point, color='red', label="Force Application")  # Force application point
+ax.scatter(0, center_of_resistance, color='blue', label="Center of Resistance")  # CR point
+
+# Draw force arrows
+ax.arrow(0, force_application_point, 0.5, 0, head_width=0.5, head_length=0.3, fc='red', ec='red')  # Force applied
+ax.arrow(0, center_of_resistance, -0.5, 0, head_width=0.5, head_length=0.3, fc='blue', ec='blue')  # Reaction force
+
+# Torque arrow (showing tipping tendency due to force application above CR)
+torque_radius = abs(force_application_point - center_of_resistance)
+circle = plt.Circle((0, center_of_resistance), torque_radius/3, color='purple', fill=False, linestyle='dashed')
+ax.add_patch(circle)
+
+# Labels
+ax.text(0.6, force_application_point, 'F', fontsize=12, color='red', verticalalignment='center')
+ax.text(-0.7, center_of_resistance, 'CR', fontsize=12, color='blue', verticalalignment='center')
+ax.text(0.6, center_of_resistance + torque_radius / 3, 'Torque', fontsize=12, color='purple')
+
+# Aesthetics
+ax.set_xlim(-3, 3)
+ax.set_ylim(-2, tooth_length + 2)
+ax.set_xticks([])
+ax.set_yticks([])
+ax.set_frame_on(False)
+ax.legend(loc="upper right", fontsize=10)
+plt.title("Equilibrium Diagram of Distal Displacement")
+
+# Show the diagram
+plt.show()

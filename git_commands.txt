@@ -1,0 +1,47 @@
+## Add all changes
+git add .
+
+# Commit with a message
+git commit -m "beta update"
+
+# Push to the 'beta' branch
+git push -u origin beta
+
+# Switch to alpha
+git checkout -b alpha
+
+# Add all changes
+git add .
+
+# Commit with a message
+git commit -m "alpha update"
+
+# Push to the 'alpha' branch
+git push -u origin alpha
+
+git status
+
+# Remove old venv
+rm -r .venv
+
+# Create new venv
+python -m venv .venv
+
+# Activate new venv
+.venv\Scripts\activate
+
+# Install dependencies
+pip install --upgrade pip
+
+# First, remove the current .git since we want to clone instead
+rm -rf .git
+
+# Clone the specific branch (laptop_temp) from your repository
+git clone -b current_working_temp https://github.com/orthybt/Orthy_App_.git .
+
+# Add the remote origin (though it should already be set from clone)
+git remote add origin https://github.com/orthybt/Orthy_App_.git
+
+# Fetch all branches
+git fetch origin
+

@@ -1,0 +1,5 @@
+Pillow==9.0.1
+pynput==1.7.6
+cairosvg==2.5.2
+lxml==4.6.3
+tkinter==0.1.0
